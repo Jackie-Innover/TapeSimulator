@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Threading;
 using ThreeVR.Libraries.Common;
 
@@ -29,6 +30,7 @@ namespace TapeSimulatorConsole
 
         private static void SendDataToEss()
         {
+            WebSocketClient.MonitorSendDataCounTimer.Change(TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
             Stopwatch stopwatch = Stopwatch.StartNew();
             for (int i = 0; i < TapeSimulatorSetting.Instance.SendTimeCount; i++)
             {
@@ -40,12 +42,20 @@ namespace TapeSimulatorConsole
             stopwatch.Stop();
             if (stopwatch.Elapsed.TotalSeconds > 60)
             {
-                Console.WriteLine("Warnning: Send over time!!!. Spent time:{0}", stopwatch.Elapsed.TotalSeconds);
+                Console.WriteLine("Warnning: Send over time!!!. Spent time:{0}s", stopwatch.Elapsed.TotalSeconds);
             }
             else
             {
-                Console.WriteLine("Send done. Spent time {0}", stopwatch.Elapsed.TotalSeconds);
+                Console.WriteLine("Send done. Spent time {0}s", stopwatch.Elapsed.TotalSeconds.ToString("F2"));
             }
+            WebSocketClient.MonitorSendDataCounTimer.Change(Timeout.Infinite, Timeout.Infinite);
+            WebSocketClient.ResetSendDataCount();
+
+            FileInfo fileInfo = new FileInfo(TapeSimulatorSetting.Instance.VideoFilePath);
+            double sendSpeed = (fileInfo.Length * 1.0 * TapeSimulatorSetting.Instance.SendTimeCount /
+                                stopwatch.Elapsed.TotalSeconds / 1024 / 1024);
+            Console.WriteLine("Average send speed: {0} MB", sendSpeed.ToString("F2"));
+
             _running = false;
         }
     }

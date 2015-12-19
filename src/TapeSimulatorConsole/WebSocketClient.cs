@@ -17,12 +17,21 @@ namespace TapeSimulatorConsole
         private readonly string _applianceDisplayName;
         private volatile AutoResetEvent _waitConnectionOpenedEvent;
         public volatile WebSessionStatus Status;
+        private static long _sendDataLengthCount;
+
         private int _loginAttemps;
         private volatile WebSocket _webSocket;
         private static long _getPutResponseCnt;
         private static long _getPutRequestCnt;
 
-        public WebSocketClient(string uri, string userName, string password, string applianceGuid, string applianceDisplayName, bool isStandaloneClient = false)
+        public static Timer MonitorSendDataCounTimer = new Timer(state =>
+          {
+              Console.WriteLine("Send data count: {0} MB", (_sendDataLengthCount * 1.0 / 1024 / 1024).ToString("F2"));
+              Interlocked.Add(ref _sendDataLengthCount, 0 - _sendDataLengthCount);
+
+          }, null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
+
+        public WebSocketClient(string uri, string userName, string password, string applianceGuid, string applianceDisplayName)
         {
             //ServicePointManager.ServerCertificateValidationCallback = OnValidationCallback;
             _waitConnectionOpenedEvent = new AutoResetEvent(false);
@@ -33,6 +42,11 @@ namespace TapeSimulatorConsole
             _applianceGuid = applianceGuid;
             _applianceDisplayName = applianceDisplayName;
             Login();
+        }
+
+        public static void ResetSendDataCount()
+        {
+            Interlocked.Add(ref _sendDataLengthCount, 0 - _sendDataLengthCount);
         }
 
         public void Login()
@@ -164,6 +178,7 @@ namespace TapeSimulatorConsole
                     };
 
                     bool isSuccess = (bool)WebSocketHandler.SendRequestReturnResult(this, putFileRequest);
+                    Interlocked.Add(ref _sendDataLengthCount, needSendData.FileData.Length);
                     if (!isSuccess)
                     {
                         WebSocketNotificationHandler.ReceiveResponse(putFileProxyRequest.RequestId, false);

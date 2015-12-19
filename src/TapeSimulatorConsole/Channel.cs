@@ -11,10 +11,19 @@ namespace TapeSimulatorConsole
         public int ChannelId { get; set; }
         public string ApplianceGuid { get; set; }
 
+        /// <summary>
+        /// The hour that last time to get file name.
+        /// </summary>
+        private readonly int _hourGetFileNameLastTime = DateTime.Now.Hour;
+
         public string NextFileName()
         {
-            //TODO: when change to next hour, please reset _fileIndex to 0.
-            //Interlocked.Add(ref _fileIndex, 0 - _fileIndex);
+            if (_hourGetFileNameLastTime != DateTime.Now.Hour)
+            {
+                //when change to next hour, reset _fileIndex to 0.
+                Interlocked.Add(ref _fileIndex, 0 - _fileIndex);
+            }
+
             DateTime currentDateTime = DateTime.Now;
 
             string datePart = currentDateTime.ToString("yyyy_MM_dd");

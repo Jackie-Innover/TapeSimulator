@@ -6,6 +6,7 @@ namespace TapeSimulatorConsole
     {
         private static void Main(string[] args)
         {
+            //TODO: Use a video file size more than 10 MB to test.
             Console.WriteLine("Tape Simulator do not use security protocol to send data to ESS.");
             try
             {

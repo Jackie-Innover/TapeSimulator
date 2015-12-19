@@ -23,6 +23,7 @@ namespace TapeSimulatorConsole
                     writer.Write((int)putFileRequest.Position);
                     writer.Write(putFileRequest.FileData.Length);
                     writer.Write(putFileRequest.FileData);
+                    writer.Write(putFileRequest.IsWriteToDisk);
                     var data = output.ToArray();
                     return data;
                 }
