@@ -72,18 +72,10 @@
     <Compile Include="WebSocketResponse.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Dlls\log4net.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Dlls\Newtonsoft.Json.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Dlls\ThreeVR.Libraries.Common.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Dlls\WebSocket4Net.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Dlls\log4net.dll" />
+    <Content Include="Dlls\Newtonsoft.Json.dll" />
+    <Content Include="Dlls\ThreeVR.Libraries.Common.dll" />
+    <Content Include="Dlls\WebSocket4Net.dll" />
     <Content Include="TapeSimulatorConfig.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
