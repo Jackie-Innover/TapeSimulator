@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TapeSimulatorConfig>
+
+  <ExtendedStorageServerDetails>
+    <Host>192.168.200.160</Host>
+    <Port>443</Port>
+    <UserName>techrep</UserName>
+    <Password>ef/vxlf6nySb3VdYWIW+rSd3QBE=</Password>
+  </ExtendedStorageServerDetails>
+
+  <ExtendedStorageClientDetails>
+    <ClientGuid>F64DBC4D-58F5-4060-B078-8F1EF7E61563</ClientGuid>
+    <ClientDisplayName>VMS_TapeSimulator</ClientDisplayName>
+  </ExtendedStorageClientDetails>
+
+  <SendTimesPerMinute>420</SendTimesPerMinute>
+  <VideoFilePath>demo.avi</VideoFilePath>
+  <ChannelCount>36</ChannelCount>
+  <IsWriteToDisk>False</IsWriteToDisk>
+</TapeSimulatorConfig>
