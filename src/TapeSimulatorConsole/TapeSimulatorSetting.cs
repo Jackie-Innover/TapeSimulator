@@ -59,14 +59,17 @@ namespace TapeSimulatorConsole
 
             string clientGuid = essClientRootElement.Element("ClientGuid").Value;
             string clientDisplayName = essClientRootElement.Element("ClientDisplayName").Value;
-            int sendTimeCount = int.Parse(configElement.Element("SendTimesPerMinute").Value);
-            string videoFilePath = configElement.Element("VideoFilePath").Value;
+
+            XElement tapeSimulatorElement = configElement.Element("TapeSimulatorDetails");
+
+            int sendTimeCount = int.Parse(tapeSimulatorElement.Element("SendTimesPerMinute").Value);
+            string videoFilePath = tapeSimulatorElement.Element("VideoFilePath").Value;
             int channelCount;
-            if (!int.TryParse(configElement.Element("ChannelCount").Value, out channelCount))
+            if (!int.TryParse(tapeSimulatorElement.Element("ChannelCount").Value, out channelCount))
             {
                 channelCount = 36;
             }
-            bool isWriteToDisk = bool.Parse(configElement.Element("IsWriteToDisk").Value);
+            bool isWriteToDisk = bool.Parse(tapeSimulatorElement.Element("IsWriteToDisk").Value);
 
             Host = host;
             PortNumber = portNumber;

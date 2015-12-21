@@ -19,11 +19,14 @@
     <ClientDisplayName>VMS_TapeSimulator</ClientDisplayName>
   </ExtendedStorageClientDetails>
 
-  <!-- Total times per minute send video file to Extended Storage Server-->
-  <SendTimesPerMinute>68</SendTimesPerMinute>
-  <!-- The file name or file path of file will send to Extended Storage Server-->
-  <VideoFilePath>code.cs</VideoFilePath>
-  <!-- Fake Channel count-->
-  <ChannelCount>36</ChannelCount>
-  <IsWriteToDisk>False</IsWriteToDisk>
+  <TapeSimulatorDetails>
+    <!-- Total times per minute send video file to Extended Storage Server-->
+    <SendTimesPerMinute>68</SendTimesPerMinute>
+    <!-- The file name or file path of file will send to Extended Storage Server-->
+    <VideoFilePath>code.cs</VideoFilePath>
+    <!-- Fake Channel count-->
+    <ChannelCount>36</ChannelCount>
+    <IsWriteToDisk>False</IsWriteToDisk>
+  </TapeSimulatorDetails>
+
 </TapeSimulatorConfig>
