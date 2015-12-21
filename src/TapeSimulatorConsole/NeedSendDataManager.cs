@@ -54,11 +54,12 @@ namespace TapeSimulatorConsole
             }
             using (FileStream fileStream = new FileStream(TapeSimulatorSetting.Instance.VideoFilePath, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
-                var blockData = new byte[TransferBlockSize];
+                
                 var position = FilePosition.Head;
                 int totalReadSize = 0;
                 while (totalReadSize < fileStream.Length)
                 {
+                    var blockData = new byte[TransferBlockSize];
                     if (fileStream.Length - totalReadSize < TransferBlockSize)
                     {
                         blockData = new byte[fileStream.Length - totalReadSize];

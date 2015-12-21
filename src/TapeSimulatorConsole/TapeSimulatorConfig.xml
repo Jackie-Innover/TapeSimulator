@@ -2,7 +2,7 @@
 <TapeSimulatorConfig>
 
   <ExtendedStorageServerDetails>
-    <Host>192.168.200.160</Host>
+    <Host>192.168.200.180</Host>
     <Port>443</Port>
     <UserName>techrep</UserName>
     <Password>ef/vxlf6nySb3VdYWIW+rSd3QBE=</Password>
