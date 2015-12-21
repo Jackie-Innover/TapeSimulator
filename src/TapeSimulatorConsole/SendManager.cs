@@ -8,7 +8,7 @@ namespace TapeSimulatorConsole
 {
     public static class SendManager
     {
-        private static readonly QueuingThreadPool _threadPool = new QueuingThreadPool("TapeSimulator", 10);
+        private static readonly QueuingThreadPool _threadPool = new QueuingThreadPool("TapeSimulator", 1);
         private static readonly WebSocketHandler webSocketHandler = new WebSocketHandler();
         private static bool _running;
 

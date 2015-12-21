@@ -13,20 +13,21 @@
   </ExtendedStorageServerDetails>
 
   <ExtendedStorageClientDetails>
-    <!-- Fake appliance's GUID-->
+    <!-- Fake appliance's GUID -->
+    <!-- *********************************************** -->
+    <!-- Please make sure different Tape Simulator use different GUID -->
+    <!-- *********************************************** -->
     <ClientGuid>F64DBC4D-58F5-4060-B078-8F1EF7E61563</ClientGuid>
-    <!-- Fake appliance's display name-->
-    <ClientDisplayName>VMS_TapeSimulator</ClientDisplayName>
   </ExtendedStorageClientDetails>
 
   <TapeSimulatorDetails>
     <!-- Total times per minute send video file to Extended Storage Server-->
-    <SendTimesPerMinute>68</SendTimesPerMinute>
+    <SendTimesPerMinute>90</SendTimesPerMinute>
     <!-- The file name or file path of file will send to Extended Storage Server-->
-    <VideoFilePath>code.cs</VideoFilePath>
+    <VideoFilePath>demo.avi</VideoFilePath>
     <!-- Fake Channel count-->
-    <ChannelCount>36</ChannelCount>
-    <IsWriteToDisk>False</IsWriteToDisk>
+    <ChannelCount>54</ChannelCount>
+    
   </TapeSimulatorDetails>
 
 </TapeSimulatorConfig>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace TapeSimulatorConsole
 {
@@ -6,13 +7,21 @@ namespace TapeSimulatorConsole
     {
         private static void Main(string[] args)
         {
-            Console.WriteLine("Tape Simulator do not use security protocol to send data to ESS.");
+            //Console.WriteLine("Tape Simulator do not use security protocol to send data to ESS.");
             try
             {
+                bool isLoadConfigurationFileCorrectly = TapeSimulatorSetting.Instance.IsLoadConfigurationCorrectly;
+
+                if (!isLoadConfigurationFileCorrectly)
+                {
+                    Console.WriteLine("Please check configuration, and restart this application.");
+                    Console.ReadKey();
+                    return;
+                }
+
                 AsyncWebSocketRequests.Instance.Start(TapeSimulatorSetting.Instance.Uri,
                     TapeSimulatorSetting.Instance.UserName, TapeSimulatorSetting.Instance.Password,
                     TapeSimulatorSetting.Instance.ClientGuid, TapeSimulatorSetting.Instance.ClientDisplayName);
-
                 SendManager.SendData();
             }
             catch (Exception ex)

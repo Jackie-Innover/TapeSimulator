@@ -28,7 +28,7 @@ namespace TapeSimulatorConsole
               Console.WriteLine("Send data speed: {0} MB/s", (_sendDataLengthCount * 1.0 / 1024 / 1024).ToString("F2"));
               Interlocked.Add(ref _sendDataLengthCount, 0 - _sendDataLengthCount);
 
-          }, null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
+          }, null, Timeout.Infinite, Timeout.Infinite);
 
         public WebSocketClient(string uri, string userName, string password, string applianceGuid, string applianceDisplayName)
         {
