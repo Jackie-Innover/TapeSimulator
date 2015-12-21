@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 
 namespace TapeSimulatorConsole
 {
@@ -7,7 +6,6 @@ namespace TapeSimulatorConsole
     {
         private static void Main(string[] args)
         {
-            //Console.WriteLine("Tape Simulator do not use security protocol to send data to ESS.");
             try
             {
                 bool isLoadConfigurationFileCorrectly = TapeSimulatorSetting.Instance.IsLoadConfigurationCorrectly;
@@ -26,7 +24,7 @@ namespace TapeSimulatorConsole
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Failed to load TapeSimulatorConfig.xml file. Please check it and restart the application." + Environment.NewLine + ex);
+                Console.WriteLine("Failed to start application. Please check and restart the application." + Environment.NewLine + ex);
             }
             Console.ReadKey();
         }
