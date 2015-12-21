@@ -2,19 +2,28 @@
 <TapeSimulatorConfig>
 
   <ExtendedStorageServerDetails>
-    <Host>192.168.200.180</Host>
+    <!-- Extended Storage Server host address-->
+    <Host>192.168.200.160</Host>
+    <!-- Extended Storage Server used port-->
     <Port>443</Port>
+    <!-- UserName used to connect to Extended Storage Server-->
     <UserName>techrep</UserName>
-    <Password>ef/vxlf6nySb3VdYWIW+rSd3QBE=</Password>
+    <!-- Password used to connect to Extended Storage Server-->
+    <Password>3MeDeee</Password>
   </ExtendedStorageServerDetails>
 
   <ExtendedStorageClientDetails>
+    <!-- Fake appliance's GUID-->
     <ClientGuid>F64DBC4D-58F5-4060-B078-8F1EF7E61563</ClientGuid>
+    <!-- Fake appliance's display name-->
     <ClientDisplayName>VMS_TapeSimulator</ClientDisplayName>
   </ExtendedStorageClientDetails>
 
-  <SendTimesPerMinute>420</SendTimesPerMinute>
-  <VideoFilePath>demo.avi</VideoFilePath>
+  <!-- Total times per minute send video file to Extended Storage Server-->
+  <SendTimesPerMinute>68</SendTimesPerMinute>
+  <!-- The file name or file path of file will send to Extended Storage Server-->
+  <VideoFilePath>code.cs</VideoFilePath>
+  <!-- Fake Channel count-->
   <ChannelCount>36</ChannelCount>
   <IsWriteToDisk>False</IsWriteToDisk>
 </TapeSimulatorConfig>

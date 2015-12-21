@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using ThreeVR.Common;
 using WebSocket4Net;
 using ErrorEventArgs = SuperSocket.ClientEngine.ErrorEventArgs;
 
@@ -24,9 +23,9 @@ namespace TapeSimulatorConsole
         private static long _getPutResponseCnt;
         private static long _getPutRequestCnt;
 
-        public static Timer MonitorSendDataCounTimer = new Timer(state =>
+        public static readonly Timer MonitorSendDataCounTimer = new Timer(state =>
           {
-              Console.WriteLine("Send data count: {0} MB", (_sendDataLengthCount * 1.0 / 1024 / 1024).ToString("F2"));
+              Console.WriteLine("Send data speed: {0} MB/s", (_sendDataLengthCount * 1.0 / 1024 / 1024).ToString("F2"));
               Interlocked.Add(ref _sendDataLengthCount, 0 - _sendDataLengthCount);
 
           }, null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
@@ -89,10 +88,6 @@ namespace TapeSimulatorConsole
         private void webSocket_MessageReceived(object sender, MessageReceivedEventArgs e)
         {
             var response = JsonConvert.DeserializeObject<WebSocketResponse>(e.Message);
-            //if (ExtStorageSettings.Instance().LogExtStorageMsg)
-            //{
-            //    Runtime.Log.Debug("WebSocket Client receives response " + response.RequestId);
-            //}
             if (response.ResponseType == WebSocketResponseType.PutFileResponse)
             {
                 Interlocked.Increment(ref _getPutResponseCnt);
@@ -105,14 +100,12 @@ namespace TapeSimulatorConsole
                         {
                             Status = WebSessionStatus.Active;
                             Console.WriteLine("WebSocket Connection is opened" + Environment.NewLine);
-                            //var authenticationResponse = JsonConvert.DeserializeObject<AuthenticationResponse>(e.Message);
-                            //_serverFeatures = authenticationResponse.ServerFeatures;
                         }
                         else
                         {
                             Status = WebSessionStatus.Inactive;
                             Interlocked.Increment(ref _loginAttemps);
-                            Runtime.Log.Error("Exception during authentication: " + response.ExceptionItem);
+                            Console.WriteLine("Exception during authentication: " + response.ExceptionItem);
                         }
                         _waitConnectionOpenedEvent.Set();
                         break;
@@ -123,10 +116,8 @@ namespace TapeSimulatorConsole
                         WebSocketNotificationHandler.ReceiveResponse(response.RequestId, putFileResponse.ExecuteSuccess);
                         break;
                     }
-                // Although now ESS Server send GetFileResponse via bytes not JSON base64,
-                // we still keep old logic to support new ESS client and old ESS Server
                 default:
-                    Runtime.Log.Error("Unrecognized WebSocket response");
+                    Console.WriteLine("Unrecognized WebSocket response");
                     break;
             }
         }

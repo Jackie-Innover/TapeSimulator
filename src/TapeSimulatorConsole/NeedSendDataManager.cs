@@ -54,7 +54,6 @@ namespace TapeSimulatorConsole
             }
             using (FileStream fileStream = new FileStream(TapeSimulatorSetting.Instance.VideoFilePath, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
-                
                 var position = FilePosition.Head;
                 int totalReadSize = 0;
                 while (totalReadSize < fileStream.Length)

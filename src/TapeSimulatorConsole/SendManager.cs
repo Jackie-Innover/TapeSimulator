@@ -54,7 +54,7 @@ namespace TapeSimulatorConsole
             FileInfo fileInfo = new FileInfo(TapeSimulatorSetting.Instance.VideoFilePath);
             double sendSpeed = (fileInfo.Length * 1.0 * TapeSimulatorSetting.Instance.SendTimeCount /
                                 stopwatch.Elapsed.TotalSeconds / 1024 / 1024);
-            Console.WriteLine("Average send speed: {0} MB", sendSpeed.ToString("F2"));
+            Console.WriteLine("Average send speed: {0} MB/s", sendSpeed.ToString("F2"));
 
             _running = false;
         }

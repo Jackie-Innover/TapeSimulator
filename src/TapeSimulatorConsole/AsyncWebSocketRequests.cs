@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading;
-using ThreeVR.Common;
 
 namespace TapeSimulatorConsole
 {
@@ -70,7 +69,8 @@ namespace TapeSimulatorConsole
                 }
                 catch (Exception e)
                 {
-                    Runtime.Log.Warn("Exception in batch WebSocket pipeline AysncWebSocket.", e);
+                    //Runtime.Log.Warn("Exception in batch WebSocket pipeline AysncWebSocket.", e);
+                    Console.WriteLine("Exception in batch WebSocket pipeline AysncWebSocket.", e);
                 }
             }
         }

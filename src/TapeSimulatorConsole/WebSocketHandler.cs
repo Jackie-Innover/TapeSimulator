@@ -102,7 +102,7 @@ namespace TapeSimulatorConsole
             if (!syncRequest.WaitEvent.WaitOne(timeoutSpan))
             {
                 RequestsOnNotification.Remove(syncRequest.Request.RequestId);
-                Runtime.Log.Warn("Timeout for this WebSocket request " + syncRequest.Request);
+                Console.WriteLine("Timeout for this WebSocket request " + syncRequest.Request);
                 return false;
             }
             object status;

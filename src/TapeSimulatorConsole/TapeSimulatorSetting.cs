@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
+using ThreeVR.Common;
 
 // ReSharper disable PossibleNullReferenceException
 
@@ -52,6 +53,8 @@ namespace TapeSimulatorConsole
             string portNumber = essRootElement.Element("Port").Value;
             string userName = essRootElement.Element("UserName").Value;
             string password = essRootElement.Element("Password").Value;
+            password = Runtime.GenerateSha1Hash(password);
+            
             XElement essClientRootElement = configElement.Element("ExtendedStorageClientDetails");
 
             string clientGuid = essClientRootElement.Element("ClientGuid").Value;

@@ -76,6 +76,9 @@
     <Content Include="Dlls\Newtonsoft.Json.dll" />
     <Content Include="Dlls\ThreeVR.Libraries.Common.dll" />
     <Content Include="Dlls\WebSocket4Net.dll" />
+    <Content Include="readme.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TapeSimulatorConfig.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
