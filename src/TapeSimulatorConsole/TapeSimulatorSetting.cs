@@ -17,7 +17,7 @@ namespace TapeSimulatorConsole
         public string UserName { get; }
         public string Password { get; }
 
-        public string ClientGuid { get; }
+        public string ClientGuid { get; set; }
         public string ClientDisplayName { get; }
 
         public int SendTimeCount { get; }
@@ -44,11 +44,6 @@ namespace TapeSimulatorConsole
                 string password = essRootElement.Element("Password").Value;
                 password = Runtime.GenerateSha1Hash(password);
 
-                XElement essClientRootElement = configElement.Element("ExtendedStorageClientDetails");
-
-                string clientGuid = essClientRootElement.Element("ClientGuid").Value;
-                //string clientDisplayName = essClientRootElement.Element("ClientDisplayName").Value;
-
                 XElement tapeSimulatorElement = configElement.Element("TapeSimulatorDetails");
 
                 int sendTimeCount = int.Parse(tapeSimulatorElement.Element("SendTimesPerMinute").Value);
@@ -66,7 +61,7 @@ namespace TapeSimulatorConsole
                 PortNumber = portNumber;
                 UserName = userName;
                 Password = password;
-                ClientGuid = clientGuid;
+                //ClientGuid = clientGuid;
                 ClientDisplayName = "VMS_TapeSimulator001";
 
                 SendTimeCount = sendTimeCount;
@@ -78,7 +73,7 @@ namespace TapeSimulatorConsole
             catch (Exception ex)
             {
                 IsLoadConfigurationCorrectly = false;
-                Console.WriteLine("Fail to load TapeSimulatorConfig.xml, please check it.");
+                Console.WriteLine("Fail to load TapeSimulatorConfig.xml, please check it."+ex);
             }
         }
 

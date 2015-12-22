@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TapeSimulatorConsole", "TapeSimulatorConsole\TapeSimulatorConsole.csproj", "{CBF4D85F-A5C8-42CA-80B1-702BD10FC4AC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Launcher", "Launcher\Launcher.csproj", "{DB481863-A833-4E18-AD4E-3FBB3DC76F62}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{CBF4D85F-A5C8-42CA-80B1-702BD10FC4AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBF4D85F-A5C8-42CA-80B1-702BD10FC4AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBF4D85F-A5C8-42CA-80B1-702BD10FC4AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB481863-A833-4E18-AD4E-3FBB3DC76F62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB481863-A833-4E18-AD4E-3FBB3DC76F62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB481863-A833-4E18-AD4E-3FBB3DC76F62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB481863-A833-4E18-AD4E-3FBB3DC76F62}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

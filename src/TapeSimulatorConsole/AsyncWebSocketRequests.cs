@@ -69,7 +69,6 @@ namespace TapeSimulatorConsole
                 }
                 catch (Exception e)
                 {
-                    //Runtime.Log.Warn("Exception in batch WebSocket pipeline AysncWebSocket.", e);
                     Console.WriteLine("Exception in batch WebSocket pipeline AysncWebSocket.", e);
                 }
             }

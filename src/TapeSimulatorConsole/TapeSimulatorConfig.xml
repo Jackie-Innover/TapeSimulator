@@ -12,13 +12,8 @@
     <Password>3MeDeee</Password>
   </ExtendedStorageServerDetails>
 
-  <ExtendedStorageClientDetails>
-    <!-- Fake appliance's GUID -->
-    <!-- *********************************************** -->
-    <!-- Please make sure different Tape Simulator use different GUID -->
-    <!-- *********************************************** -->
-    <ClientGuid>F64DBC4D-58F5-4060-B078-8F1EF7E61563</ClientGuid>
-  </ExtendedStorageClientDetails>
+  <!-- Please make sure different simulator launcher use different client base GUID-->
+  <ClientBaseGuid>894B8EDA-8E28-45A1-9D68-</ClientBaseGuid>
 
   <TapeSimulatorDetails>
     <!-- Total times per minute send video file to Extended Storage Server-->
@@ -27,7 +22,7 @@
     <VideoFilePath>demo.avi</VideoFilePath>
     <!-- Fake Channel count-->
     <ChannelCount>54</ChannelCount>
-    
+
   </TapeSimulatorDetails>
 
 </TapeSimulatorConfig>
