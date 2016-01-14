@@ -1,4 +1,7 @@
-﻿using System;
+﻿
+
+using System;
+
 
 namespace TapeSimulatorConsole
 {
@@ -6,6 +9,7 @@ namespace TapeSimulatorConsole
     {
         private static void Main(string[] args)
         {
+
             if (args.Length <= 0)
             {
                 Console.WriteLine("Not pass client GUID, please check it.");
@@ -30,9 +34,10 @@ namespace TapeSimulatorConsole
                     return;
                 }
 
-                AsyncWebSocketRequests.Instance.Start(TapeSimulatorSetting.Instance.Uri,
-                    TapeSimulatorSetting.Instance.UserName, TapeSimulatorSetting.Instance.Password,
-                    TapeSimulatorSetting.Instance.ClientGuid, TapeSimulatorSetting.Instance.ClientDisplayName);
+                AsyncWebSocketRequests.Instance.Start(TapeSimulatorSetting.Instance.Host,
+                    TapeSimulatorSetting.Instance.PortNumber, TapeSimulatorSetting.Instance.UserName,
+                    TapeSimulatorSetting.Instance.Password, TapeSimulatorSetting.Instance.ClientGuid,
+                    TapeSimulatorSetting.Instance.ClientDisplayName);
 
                 SendManager.SendData();
             }

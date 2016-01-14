@@ -1,8 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Threading;
 using WebSocket4Net;
+using WebSocket4Net.Protocol;
 using ErrorEventArgs = SuperSocket.ClientEngine.ErrorEventArgs;
 
 namespace TapeSimulatorConsole
@@ -25,10 +27,41 @@ namespace TapeSimulatorConsole
 
         public static readonly Timer MonitorSendDataCounTimer = new Timer(state =>
           {
-              Console.WriteLine("Send data speed: {0} MB/s", (_sendDataLengthCount * 1.0 / 1024 / 1024).ToString("F2"));
+              Console.WriteLine("Send data speed: {0} MB/s  SendRequest:{1} ReceiveResponse:{2}", (_sendDataLengthCount * 1.0 / 1024 / 1024).ToString("F2"), _getPutRequestCnt, _getPutResponseCnt);
               Interlocked.Add(ref _sendDataLengthCount, 0 - _sendDataLengthCount);
+              Interlocked.Add(ref _getPutRequestCnt, 0 - _getPutRequestCnt);
+              Interlocked.Add(ref _getPutResponseCnt, 0 - _getPutResponseCnt);
 
           }, null, Timeout.Infinite, Timeout.Infinite);
+
+        static WebSocketClient()
+        {
+            var fieldFactory = typeof(WebSocket).GetField("m_ProtocolProcessorFactory",
+                BindingFlags.GetField | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.ExactBinding);
+
+            var valFactory = fieldFactory.GetValue(null);
+
+            var fieldArry = valFactory.GetType()
+                .GetField("m_OrderedProcessors",
+                BindingFlags.GetField | BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.ExactBinding);
+
+            var valArry = fieldArry.GetValue(valFactory) as IProtocolProcessor[];
+            if (valArry != null)
+            {
+                for (int i = 0; i < valArry.Length; i++)
+                {
+                    var processor = valArry[i];
+                    if (processor.Version != WebSocketVersion.Rfc6455)
+                    {
+                        continue;
+                    }
+
+                    var hackedProcessor = new HackedRfc6455Processor(processor);
+                    valArry[i] = hackedProcessor;
+                    break;
+                }
+            }
+        }
 
         public WebSocketClient(string uri, string userName, string password, string applianceGuid, string applianceDisplayName)
         {

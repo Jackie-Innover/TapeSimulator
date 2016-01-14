@@ -13,7 +13,7 @@ namespace TapeSimulatorConsole
 
         public static readonly TapeSimulatorSetting Instance = new TapeSimulatorSetting();
         public string Host { get; }
-        public string PortNumber { get; }
+        public int PortNumber { get; }
         public string UserName { get; }
         public string Password { get; }
 
@@ -24,6 +24,9 @@ namespace TapeSimulatorConsole
         public string VideoFilePath { get; }
         public int ChannelCount { get; }
         public bool IsWriteToDisk { get; }
+        public int TransferBlockSize { get; }
+        public bool IsDirectConnectToEss { get; }
+
         public string Uri => $"ws://{Host}:{PortNumber}";
 
         public readonly bool IsLoadConfigurationCorrectly;
@@ -53,12 +56,18 @@ namespace TapeSimulatorConsole
                 {
                     channelCount = 36;
                 }
-                //XElement isWriteToDiskElement = tapeSimulatorElement.Element("IsWriteToDisk");
-                //var isWriteToDisk = isWriteToDiskElement == null || bool.Parse(isWriteToDiskElement.Value);
-                //isWriteToDisk = false;
+
+                XElement isWriteToDiskElement = tapeSimulatorElement.Element("IsWriteToDisk");
+                var isWriteToDisk = isWriteToDiskElement == null || bool.Parse(isWriteToDiskElement.Value);
+
+                XElement transferBlockSizeElement = tapeSimulatorElement.Element("TransferBlockSize");
+                var transferBlockSize = int.Parse(transferBlockSizeElement.Value);
+
+                XElement isDirectConnectToEssElement = tapeSimulatorElement.Element("IsDirectConnectToESS");
+                var isDirectConnectToEss = bool.Parse(isDirectConnectToEssElement.Value);
 
                 Host = host;
-                PortNumber = portNumber;
+                PortNumber = int.Parse(portNumber);
                 UserName = userName;
                 Password = password;
                 //ClientGuid = clientGuid;
@@ -67,13 +76,16 @@ namespace TapeSimulatorConsole
                 SendTimeCount = sendTimeCount;
                 VideoFilePath = videoFilePath;
                 ChannelCount = channelCount;
-                IsWriteToDisk = true;
+                IsWriteToDisk = isWriteToDisk;
+                TransferBlockSize = transferBlockSize;
+                IsDirectConnectToEss = isDirectConnectToEss;
+
                 IsLoadConfigurationCorrectly = true;
             }
             catch (Exception ex)
             {
                 IsLoadConfigurationCorrectly = false;
-                Console.WriteLine("Fail to load TapeSimulatorConfig.xml, please check it."+ex);
+                Console.WriteLine("Fail to load TapeSimulatorConfig.xml, please check it." + ex);
             }
         }
 

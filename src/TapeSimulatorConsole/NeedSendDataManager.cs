@@ -29,7 +29,7 @@ namespace TapeSimulatorConsole
         #region Fields
 
         public static readonly NeedSendDataManager Instance = new NeedSendDataManager();
-        private const long TransferBlockSize = 512 * 1024;
+        //private const long TransferBlockSize = 512 * 1024;
         public readonly List<NeedSendData> NeedSendDatas = new List<NeedSendData>();
 
         #endregion
@@ -52,14 +52,16 @@ namespace TapeSimulatorConsole
                 Console.WriteLine("Video file {0} not exist, please check and restart the application.", TapeSimulatorSetting.Instance.VideoFilePath);
                 return;
             }
+            long transferBlockSize = 1024* TapeSimulatorSetting.Instance.TransferBlockSize;
+
             using (FileStream fileStream = new FileStream(TapeSimulatorSetting.Instance.VideoFilePath, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
                 var position = FilePosition.Head;
                 int totalReadSize = 0;
                 while (totalReadSize < fileStream.Length)
                 {
-                    var blockData = new byte[TransferBlockSize];
-                    if (fileStream.Length - totalReadSize < TransferBlockSize)
+                    var blockData = new byte[transferBlockSize];
+                    if (fileStream.Length - totalReadSize < transferBlockSize)
                     {
                         blockData = new byte[fileStream.Length - totalReadSize];
                     }

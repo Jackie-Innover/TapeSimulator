@@ -3,7 +3,7 @@
 
   <ExtendedStorageServerDetails>
     <!-- Extended Storage Server host address-->
-    <Host>192.168.200.160</Host>
+    <Host>192.168.200.168</Host>
     <!-- Extended Storage Server used port-->
     <Port>443</Port>
     <!-- UserName used to connect to Extended Storage Server-->
@@ -22,7 +22,14 @@
     <VideoFilePath>demo.avi</VideoFilePath>
     <!-- Fake Channel count-->
     <ChannelCount>54</ChannelCount>
+    <!-- If set to True, ESS will write received data to Disk, otherwise, will not write to disk. -->
+    <IsWriteToDisk>False</IsWriteToDisk>
 
+    <!-- Transfer block size, default is 512, means: every package size is 512kB -->
+    <TransferBlockSize>512</TransferBlockSize>
+    
+    <IsDirectConnectToESS>False</IsDirectConnectToESS>
+    
   </TapeSimulatorDetails>
 
 </TapeSimulatorConfig>

@@ -11,7 +11,9 @@ namespace TapeSimulatorConsole
         private static volatile AsyncWebSocketRequests _instance;
         private readonly SingleElementTransfer _nextElement;
         private readonly Thread[] _threads;
-        private string _uri;
+        //private string _uri;
+        private string _host;
+        private int _portNumber;
         private string _userName;
         private string _password;
         private string _applianceGuid;
@@ -50,7 +52,16 @@ namespace TapeSimulatorConsole
 
         private void Run()
         {
-            var handler = new WebSocketClient(_uri, _userName, _password, _applianceGuid, _applianceDisplayName);
+
+            WebSocketClient handler;
+            if (TapeSimulatorSetting.Instance.IsDirectConnectToEss)
+            {
+                handler = new WebSocketClient($"ws://{_host}:{Interlocked.Increment(ref _portNumber)}", _userName, _password, _applianceGuid, _applianceDisplayName);
+            }
+            else
+            {
+                handler = new WebSocketClient($"ws://{_host}:{_portNumber}", _userName, _password, _applianceGuid, _applianceDisplayName);
+            }
             while (true)
             {
                 try
@@ -74,9 +85,11 @@ namespace TapeSimulatorConsole
             }
         }
 
-        public void Start(string uri, string userName, string password, string applianceGuid, string applianceDisplayName)
+        public void Start(string host, int portNumber, string userName, string password, string applianceGuid, string applianceDisplayName)
         {
-            _uri = uri;
+            //_uri = uri;
+            _host = host;
+            _portNumber = portNumber;
             _userName = userName;
             _password = password;
             _applianceGuid = applianceGuid;
