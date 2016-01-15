@@ -99,7 +99,7 @@ namespace TapeSimulatorConsole
                         new KeyValuePair<string, string>(WebSocketConst.ClientHostNameKey, _applianceDisplayName),
                         new KeyValuePair<string, string>(WebSocketConst.WebSocketClientVersion, "2")};
 
-                    _webSocket = new WebSocket(_uri, cookies: cookies)
+                    _webSocket = new HackedWebSocket(_uri, cookies: cookies)
                     {
                         AllowUnstrustedCertificate = false,
                         EnableAutoSendPing = false
